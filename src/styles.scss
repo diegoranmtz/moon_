@@ -1,0 +1,58 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Fontil Sans';
+}
+
+.main-container {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+.mat-header-cell {
+  font-size: 16px;
+  font-weight:bolder;
+}
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+.mat-form-field {
+  font-size: 14px;
+}
+
+
+@media screen and (max-width: 1200px) {
+  .main-container {
+    left: 0px;
+  }
+}
+
+@media screen {
+  .push-right {
+    #sidebar {
+      left: 0 !important;
+    }
+  }
+  .transAnimacion {
+    transition-duration: 0.5s;
+  }
+
+  .bounceAnimacion {
+    animation: brinca 400ms ease-out;
+  }
+}

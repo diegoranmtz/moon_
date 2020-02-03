@@ -1,0 +1,25 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center" id="register">
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Crear cuenta</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()"class="example-form">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Nombre completo" formControlName="name" required>
+          <mat-error *ngIf="form.get('name').errors?.required">Este campo es requerido</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Cuenta" formControlName="account" required>
+          <mat-error *ngIf="form.get('account').errors?.required">Este campo es requerido</mat-error>
+          <mat-error *ngIf="form.get('account').errors?.exist">La cuenta ya existe</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-error *ngIf="form.get('password').errors?.required">Este campo es requerido</mat-error>
+          <input matInput placeholder="Contraseña" formControlName="password" required>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button color="accent" class="btn-block">Registrar</button>
+    </form>
+  </mat-card>
+</div>

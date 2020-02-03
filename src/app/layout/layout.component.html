@@ -1,0 +1,15 @@
+
+<!-- Toolbar -->
+<mat-toolbar color="primary" class="app-header">
+  <button type="button" mat-icon-button (click)="onclickMenu()">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+<div>Moon</div>
+<span class="nav-tool-items" style="margin-left: auto;">
+  <a mat-button (click)="onLoggedout()">Salir de cuenta</a>
+</span>
+</mat-toolbar>
+<app-sidebar></app-sidebar>
+<div class="main-container">
+  <router-outlet></router-outlet>
+</div>

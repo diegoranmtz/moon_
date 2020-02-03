@@ -1,0 +1,20 @@
+<div id="sidebar" class="transAnimacion">
+  <mat-nav-list>
+    <div class="nested-menu">
+      <a mat-list-item (click)="addExpandClass('cetes')">
+        <mat-icon aria-label="Side nav toggle icon">chevron_right</mat-icon> {{'Cetes Directo'}}
+      </a>
+      <ul class="nested submenu expand" [class.expand]="showMenu === 'cetes'">
+        <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{'CETES'}}</span></a></li>
+      </ul>
+    </div>
+    <div class="nested-menu">
+      <a mat-list-item (click)="addExpandClass('homeBroker')">
+        <mat-icon aria-label="Side nav toggle icon">chevron_right</mat-icon>{{'GBM HomeBroker'}}
+      </a>
+      <ul class="nested submenu expand" [class.expand]="showMenu === 'homeBroker'">
+        <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{'S&P 500'}}</span></a></li>
+      </ul>
+    </div>
+  </mat-nav-list>
+</div>

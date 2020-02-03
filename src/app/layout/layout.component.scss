@@ -1,0 +1,43 @@
+:host {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+.nav-brand {
+    width: 215px;
+    text-align: center;
+}
+
+.nav-spacer {
+    flex: 1 1 auto;
+}
+
+.visible-sm {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .nav-brand {
+        width: 100%;
+    }
+    .hidden-sm {
+        display: none;
+    }
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.radioButton {
+  margin: 5px;
+}
+.photoURL {
+  max-height: 47px;
+  max-width: 215px;
+  float:left;
+}
