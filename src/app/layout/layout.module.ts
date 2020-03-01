@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SideBarComponent } from './sidebar/sidebar.component';
+import { ChartComponent } from './dashboard/charts/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 const routes: Routes = [
@@ -25,14 +27,16 @@ const routes: Routes = [
   declarations: [
     LayoutComponent,
     DashboardComponent,
-    SideBarComponent
+    SideBarComponent,
+    ChartComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     FlexLayoutModule.withConfig({ addFlexToParent: false }),
-    AngularMaterialModule
+    AngularMaterialModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [LayoutComponent]

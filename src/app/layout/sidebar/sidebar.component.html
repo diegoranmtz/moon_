@@ -1,5 +1,5 @@
 <div id="sidebar" class="transAnimacion">
-  <mat-nav-list>
+  <!--<mat-nav-list>
     <div class="nested-menu">
       <a mat-list-item (click)="addExpandClass('cetes')">
         <mat-icon aria-label="Side nav toggle icon">chevron_right</mat-icon> {{'Cetes Directo'}}
@@ -14,6 +14,19 @@
       </a>
       <ul class="nested submenu expand" [class.expand]="showMenu === 'homeBroker'">
         <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{'S&P 500'}}</span></a></li>
+        <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{'S&P 500'}}</span></a></li>
+        <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{'S&P 500'}}</span></a></li>
+      </ul>
+    </div>
+  </mat-nav-list>-->
+
+  <mat-nav-list>
+    <div *ngFor="let item of paginaMenu; let i = index" [attr.data-index]="i" class="nested-menu" >
+      <a mat-list-item (click)="addExpandClass(item[0][0].paginaKey)">
+        <mat-icon  aria-label="Side nav toggle icon">chevron_right</mat-icon> {{item[0][0].paginaKey}}
+      </a>
+      <ul class="nested submenu expand" [class.expand]="showMenu === item[0][0].paginaKey">
+        <li *ngFor="let pag of item[0]"><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{pag.accionKey}}</span></a></li>
       </ul>
     </div>
   </mat-nav-list>
