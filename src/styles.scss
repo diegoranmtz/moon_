@@ -4,7 +4,9 @@ body {
     margin: 0;
     font-family: 'Fontil Sans';
 }
-
+.mytext {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
 .main-container {
   position: absolute;
   top: 64px;
@@ -12,6 +14,15 @@ body {
   right: 0;
   bottom: 0;
   padding: 20px;
+}
+.mat-error {
+  color: #f44336;
+  display: block;
+  font-size: 12px;
+  font-size: 75%;
+  margin-top: .66666667em;
+  top: calc(100% - 1.79167em);
+  font-family: Roboto,Helvetica Neue,sans-serif;
 }
 
 .mb-20 {

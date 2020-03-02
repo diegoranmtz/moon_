@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginaService } from 'src/shared/services/pagina.service';
 import { Pagina } from 'src/shared/models/pagina';
+import { SidebarService } from 'src/shared/services/sidebar.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -11,10 +12,15 @@ export class SideBarComponent implements OnInit {
   public showMenu: string;
   public paginas: Pagina[];
   paginaMenu = [];
-
-  constructor(private paginaService: PaginaService) {}
+  usuario: string;
+  constructor(
+    private paginaService: PaginaService,
+    public sidebarService: SidebarService
+  ) {}
   ngOnInit() {
-    this.selectPaginas('diego');
+    this.usuario = localStorage.getItem('usuario');
+    this.selectPaginas(this.usuario);
+    this.subscribeChange();
   }
 
   addExpandClass(element: string) {
@@ -48,6 +54,16 @@ export class SideBarComponent implements OnInit {
     for(let i = 0; index > i; i++){
       this.paginaMenu[i].push(obj[keys[i]]);
     }
-      console.log(this.paginaMenu);
+  }
+  subscribeChange(){
+    this.sidebarService.getSidebar().subscribe(
+      () => { this.changeSidebar()},
+      (error) => {alert('Ha ocurrido un error')}
+    );
+  }
+  changeSidebar(){
+    this.paginas = [];
+    this.paginaMenu = [];
+    this.selectPaginas(this.usuario);
   }
 }

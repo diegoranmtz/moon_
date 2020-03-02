@@ -27,6 +27,15 @@
       </a>
       <ul class="nested submenu expand" [class.expand]="showMenu === item[0][0].paginaKey">
         <li *ngFor="let pag of item[0]"><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{pag.accionKey}}</span></a></li>
+        <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>Agregar acción</span></a></li>
+      </ul>
+    </div>
+    <div class="nested-menu">
+      <a mat-list-item (click)="addExpandClass('add')">
+        <mat-icon aria-label="Side nav toggle icon">chevron_right</mat-icon>Nueva página
+      </a>
+      <ul class="nested submenu expand" [class.expand]="showMenu === 'add'">
+        <li><a mat-list-item [routerLink]="['/app/pagina']"><span>Agregar página</span></a></li>
       </ul>
     </div>
   </mat-nav-list>

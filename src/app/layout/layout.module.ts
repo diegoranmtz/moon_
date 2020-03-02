@@ -11,6 +11,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SideBarComponent } from './sidebar/sidebar.component';
 import { ChartComponent } from './dashboard/charts/chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { PaginaComponent } from './pagina/pagina.component';
+import { MonederoService } from 'src/shared/services/monedero.service';
+import { AccionService } from 'src/shared/services/accion.service';
+import { PaginaService } from 'src/shared/services/pagina.service';
+import { SidebarService } from 'src/shared/services/sidebar.service';
 
 
 const routes: Routes = [
@@ -19,6 +24,7 @@ const routes: Routes = [
   children: [
     { path: '', redirectTo: 'app/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
+    { path: 'pagina', component: PaginaComponent },
     { path: '**', component: DashboardComponent }
   ]}
 ];
@@ -28,7 +34,8 @@ const routes: Routes = [
     LayoutComponent,
     DashboardComponent,
     SideBarComponent,
-    ChartComponent
+    ChartComponent,
+    PaginaComponent
   ],
   imports: [
     CommonModule,
@@ -36,9 +43,16 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FlexLayoutModule.withConfig({ addFlexToParent: false }),
     AngularMaterialModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    MonederoService,
+    AccionService,
+    PaginaService,
+    SidebarService
+  ],
   bootstrap: [LayoutComponent]
 })
 export class LayoutModule { }

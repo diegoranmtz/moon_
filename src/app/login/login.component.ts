@@ -43,8 +43,13 @@ export class LoginComponent implements OnInit {
     );
   }
   selectLoginComplete(login: Login){
-    if(login.ok)
+    if(login.ok){
+      this.saveLocalStorage(login.usuario.account);
       return this.router.navigate(['app/dashboard']);
+    }
     this.account.setErrors({'exist': true});
+  }
+  saveLocalStorage(usuario){
+    localStorage.setItem('usuario', usuario);
   }
 }

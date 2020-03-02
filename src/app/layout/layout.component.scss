@@ -41,3 +41,7 @@
   max-width: 215px;
   float:left;
 }
+.height{
+  overflow-y: scroll;
+  height: calc(100vh - 66px)
+}

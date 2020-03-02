@@ -26,6 +26,7 @@ export class LayoutComponent implements OnInit {
     dom.classList.toggle('bounceAnimacion');
   }
   onLoggedout(){
+    localStorage.clear();
     return this.router.navigate(['login']);
   }
 }

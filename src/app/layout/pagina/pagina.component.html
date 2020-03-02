@@ -1,0 +1,52 @@
+<h3 style="margin-left: 15px;margin-bottom: 30px;">Agregar nueva página</h3>
+<div class="col-md-6">
+  <div class="card card-body">
+    <div class="row">
+      <div class="col-sm-12 col-xs-12">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>Usuario</label>
+            <input required name="usuario" class="form-control" formControlName="usuario">
+          </div>
+          <div class="form-group">
+            <label>Página</label>
+            <select (change)="cambioPagina($event.target.value)" class="form-control" required formControlName="paginaKey">
+              <option value="">Selecione página</option>
+              <option *ngFor="let monedero of monederos" [value]="monedero.paginaKey">
+                {{monedero.name}}
+              </option>
+            </select>
+            <p class="mat-error" *ngIf="form.get('paginaKey').errors?.required">Este campo es requerido</p>
+          </div>
+          <div class="form-group">
+            <label>Acción</label>
+            <select class="form-control" required formControlName="accionKey">
+              <option value="">Seleccione acción</option>
+              <option *ngFor="let accion of accions" [value]="accion.name">
+                {{accion.name}}
+              </option>
+            </select>
+            <p class="mat-error" *ngIf="form.get('accionKey').errors?.required">Este campo es requerido</p>
+          </div>
+          <div class="form-group">
+            <label>Precio</label>
+            <input required name="precioBuy" class="form-control" formControlName="precioBuy" type="number">
+            <p class="mat-error" *ngIf="form.get('precioBuy').errors?.required">Este campo es requerido</p>
+            <p class="mat-error" *ngIf="form.get('precioBuy').errors?.min">El valor no debe ser negativo o 0</p>
+          </div>
+          <div class="form-group">
+            <label>Cantidad</label>
+            <input required name="cantidad" class="form-control" formControlName="cantidad" type="number">
+            <p class="mat-error" *ngIf="form.get('cantidad').errors?.required">Este campo es requerido</p>
+            <p class="mat-error" *ngIf="form.get('cantidad').errors?.min">El valor no debe ser negativo o 0</p>
+          </div>
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+            <i class="fa fa-save"></i>
+            Guardar
+          </button>
+          <a routerLink="/app/dashboard" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
