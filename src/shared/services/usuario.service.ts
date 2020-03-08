@@ -12,6 +12,9 @@ export class UsuarioService {
     this.apiUrl = `${environment.url}usuario`;
   }
 
+  selectItem(item: any){
+    return this.httpClient.post<any>(`${this.apiUrl}/user`, item);
+  }
   insertItem(item: any){
     return this.httpClient.post<any>(`${this.apiUrl}`, item);
   }

@@ -1,21 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MonederoService } from 'src/shared/services/monedero.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccionService } from 'src/shared/services/accion.service';
 import { PaginaService } from 'src/shared/services/pagina.service';
 import { SidebarService } from 'src/shared/services/sidebar.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-pagina',
-  templateUrl: './pagina.component.html',
-  styleUrls: ['./pagina.component.scss']
+  selector: 'app-accion',
+  templateUrl: './accion.component.html',
+  styleUrls: ['./accion.component.scss']
 })
-export class PaginaComponent implements OnInit {
+export class AccionComponent implements OnInit {
   monederos: any;
   form: FormGroup;
   accions: any;
   usuario: string;
+  paginaKey: string;
 
   constructor(
     private monederoService: MonederoService,
@@ -23,11 +24,17 @@ export class PaginaComponent implements OnInit {
     private accionService: AccionService,
     private paginaService: PaginaService,
     public sidebarService: SidebarService,
-    public router: Router
+    private route: ActivatedRoute,
+    private router: Router
   ){ }
   ngOnInit(){
     this.usuario = localStorage.getItem('usuario');
     this.createForm();
+    this.route.params.subscribe( paramMap => {
+      this.paginaKey = paramMap['paginaKey'];
+      this.form.get('paginaKey').setValue(this.paginaKey);
+      this.cambioPagina(this.paginaKey);
+    });
     this.selectMonederos();
   }
 
@@ -39,6 +46,7 @@ export class PaginaComponent implements OnInit {
 
     const mergedItem = { ...this.form.value };
     mergedItem.usuario = this.usuario;
+    mergedItem.paginaKey = this.paginaKey;
     console.log(mergedItem);
     this.insertItem(mergedItem);
   }
@@ -46,7 +54,7 @@ export class PaginaComponent implements OnInit {
   createForm() {
     this.form = this.formBuilder.group({
       usuario: [{ value: this.usuario, disabled: true }, Validators.required],
-      paginaKey: ['', Validators.required],
+      paginaKey: [{ value: '', disabled: true }, Validators.required],
       accionKey: ['', Validators.required],
       precioBuy: ['', [Validators.required, Validators.min(1)]],
       cantidad: ['', [Validators.required,  Validators.min(1)]]

@@ -1,0 +1,55 @@
+<div class="row" style="margin-bottom: 10px;">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h3>Acción: {{accionKey}}</h3>
+        <h3>Usuario: {{usuario}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <h6>Valor de la acción: ${{total}}</h6>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>Precio</label>
+            <input required name="precioBuy" class="form-control" formControlName="precioBuy" type="number">
+            <p class="mat-error" *ngIf="form.get('precioBuy').errors?.required">Este campo es requerido</p>
+            <p class="mat-error" *ngIf="form.get('precioBuy').errors?.min">El valor no debe ser negativo o 0</p>
+          </div>
+          <div class="form-group">
+            <label>Cantidad</label>
+            <input required name="cantidad" class="form-control" formControlName="cantidad" type="number">
+            <p class="mat-error" *ngIf="form.get('cantidad').errors?.required">Este campo es requerido</p>
+            <p class="mat-error" *ngIf="form.get('cantidad').errors?.min">El valor no debe ser negativo o 0</p>
+          </div>
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+            <i class="fa fa-save"></i>
+            Guardar
+          </button>
+          <a routerLink="/app/dashboard" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+          <button type="button" class="btn btn-success waves-effect waves-light m-r-10" style="float: right;" (click)="onclickDeleteItem()">
+            <i class="far fa-check-circle"></i>
+            Ya vendí esta acción
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

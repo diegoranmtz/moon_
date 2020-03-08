@@ -16,6 +16,8 @@ import { MonederoService } from 'src/shared/services/monedero.service';
 import { AccionService } from 'src/shared/services/accion.service';
 import { PaginaService } from 'src/shared/services/pagina.service';
 import { SidebarService } from 'src/shared/services/sidebar.service';
+import { AccionComponent } from './accion/accion.component';
+import { MonederoComponent } from './monedero/monedero.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,8 @@ const routes: Routes = [
     { path: '', redirectTo: 'app/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'pagina', component: PaginaComponent },
+    { path: 'accion/:paginaKey', component: AccionComponent },
+    { path: 'monedero/:accionKey', component: MonederoComponent },
     { path: '**', component: DashboardComponent }
   ]}
 ];
@@ -35,7 +39,9 @@ const routes: Routes = [
     DashboardComponent,
     SideBarComponent,
     ChartComponent,
-    PaginaComponent
+    PaginaComponent,
+    AccionComponent,
+    MonederoComponent
   ],
   imports: [
     CommonModule,

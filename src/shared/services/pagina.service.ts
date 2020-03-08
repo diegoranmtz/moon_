@@ -16,7 +16,16 @@ export class PaginaService {
   selectItem_usuario(item: { usuario: string }) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiUrl}`, item);
   }
+  selectItem_Usuario_AccionKey(item: { usuario: string, accionKey: string }) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiUrl}/accionUser`, item);
+  }
   insertItem(item) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiUrl}/guardar`, item);
+  }
+  updateItem(item) : Observable<any>{
+    return this.httpClient.put<any>(`${this.apiUrl}/${item._id}`, item);
+  }
+  deleteItem(id) : Observable<any> {
+    return this.httpClient.delete<any>(`${this.apiUrl}/${id}`);
   }
 }

@@ -23,11 +23,11 @@
   <mat-nav-list>
     <div *ngFor="let item of paginaMenu; let i = index" [attr.data-index]="i" class="nested-menu" >
       <a mat-list-item (click)="addExpandClass(item[0][0].paginaKey)">
-        <mat-icon  aria-label="Side nav toggle icon">chevron_right</mat-icon> {{item[0][0].paginaKey}}
+        <mat-icon  aria-label="Side nav toggle icon">chevron_right</mat-icon> {{item[0][0].paginaKeyDisplay}}
       </a>
       <ul class="nested submenu expand" [class.expand]="showMenu === item[0][0].paginaKey">
-        <li *ngFor="let pag of item[0]"><a mat-list-item [routerLink]="['/app/dashboard']"><span>{{pag.accionKey}}</span></a></li>
-        <li><a mat-list-item [routerLink]="['/app/dashboard']"><span>Agregar acción</span></a></li>
+        <li *ngFor="let pag of item[0]"><a mat-list-item [routerLink]="['/app/monedero/' + pag.accionKey]"><span>{{pag.accionKey}}</span></a></li>
+        <li><a mat-list-item [routerLink]="['/app/accion/' + item[0][0].paginaKey]"><span>Agregar acción</span></a></li>
       </ul>
     </div>
     <div class="nested-menu">

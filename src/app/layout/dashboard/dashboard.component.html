@@ -1,29 +1,54 @@
-<div class="row">
-  <div class="col-6">
-    <div class="card">
-      <div class="card-body">
-        <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+<div class="row" style="margin-bottom: 10px;">
+  <div class="col-4">
+      <div class="card">
+          <div class="card-body">
+              <h5>Bienvenido <b>{{usuarioName}}</b></h5>
+          </div>
+      </div>
+  </div>
+  <div class="col-4">
+      <div class="card">
+          <div class="card-body">
+            <h5>Tu mejor inversión es en <b>{{inversion}}</b></h5>
+          </div>
+      </div>
+  </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+              <h5>El valor total de tu cartera es: <b>${{total}}</b></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6" style="margin-bottom: 10px;">
+      <div class="card">
+        <div class="card-body">
+          <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-6">
-    <div class="card">
-      <div class="card-body">
-        <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+    <div class="col-6" style="margin-bottom: 10px;">
+      <div class="card">
+        <div class="card-body">
+          <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-6">
-    <div class="card">
-      <div class="card-body">
-        <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-6">
-    <div class="card">
-      <div class="card-body">
-        <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <app-chart [usuario]="'diego'" [accionKey]="'VOO'"></app-chart>
+        </div>
       </div>
     </div>
   </div>
