@@ -16,4 +16,7 @@ export class AccionService {
   selectItem_paginaKey(item: { paginaKey: string }) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiUrl}`, item);
   }
+  selectItems(item) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiUrl}/all`, item);
+  }
 }

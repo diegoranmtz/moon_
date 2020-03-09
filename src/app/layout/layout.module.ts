@@ -18,6 +18,7 @@ import { PaginaService } from 'src/shared/services/pagina.service';
 import { SidebarService } from 'src/shared/services/sidebar.service';
 import { AccionComponent } from './accion/accion.component';
 import { MonederoComponent } from './monedero/monedero.component';
+import { PrecioService } from 'src/shared/services/precio.service';
 
 
 const routes: Routes = [
@@ -57,7 +58,8 @@ const routes: Routes = [
     MonederoService,
     AccionService,
     PaginaService,
-    SidebarService
+    SidebarService,
+    PrecioService
   ],
   bootstrap: [LayoutComponent]
 })

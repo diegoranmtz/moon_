@@ -12,7 +12,14 @@ export class PrecioService {
     this.apiUrl = `${environment.url}precio`;
   }
 
-  selectItem_accionKey(item: { accionKey: string }){
+  selectItem_accionKey_LastSeven(item){
     return this.httpClient.post<any>(`${this.apiUrl}`, item);
+  }
+  selectItem_accionKey_Last(item: { accionKey: string }){
+    return this.httpClient.post<any>(`${this.apiUrl}/last`, item);
+  }
+  insertItem(item) {
+    item.index = parseInt(item.index);
+    return this.httpClient.post<any>(`${this.apiUrl}/guardar`, item);
   }
 }

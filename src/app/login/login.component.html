@@ -10,7 +10,7 @@
             <mat-error *ngIf="form.get('account').errors?.required">Este campo es requerido</mat-error>
             <mat-error *ngIf="form.get('account').errors?.exist">Usuario y/o contraseña incorrectos</mat-error>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="example-full-width" style="margin-top: 20px;">
             <input matInput placeholder="Contraseña" formControlName="password" required type="password">
             <mat-error *ngIf="form.get('password').errors?.required">Este campo es requerido</mat-error>
           </mat-form-field>
