@@ -85,7 +85,7 @@ export class LayoutComponent implements OnInit, OnDestroy{
       }
 
     })
-    this.insertPrecioForkJoin(observable);
+    //this.insertPrecioForkJoin(observable);
   }
   selectItem_accionKey_LastForkJoinComplete(data) {
     this.lastPrecio = {};
