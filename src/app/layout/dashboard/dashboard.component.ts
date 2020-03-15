@@ -43,8 +43,11 @@ export class DashboardComponent implements OnInit {
       (error) => {alert('Ha ocurrido un error')});
   }
   selectPaginasComplete(){
-    if(this.paginas.length === 0)
+    if(this.paginas.length === 0){
+      if(!this.usuario || this.usuario === '')
+        return;
       return alert('¡Agrege acciones!');
+    }
     this.paginas.forEach(x => { this.total = this.total + (+x.precioBuy * +x.cantidad) });
     this.calculateBestInversion();
   }

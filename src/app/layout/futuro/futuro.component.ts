@@ -5,6 +5,7 @@ import { MonederoService } from 'src/shared/services/monedero.service';
 import { PaginaService } from 'src/shared/services/pagina.service';
 import { PrecioService } from 'src/shared/services/precio.service';
 import { forkJoin } from 'rxjs';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
   selector: 'app-futuro',
@@ -12,7 +13,17 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./futuro.component.scss']
 })
 export class FuturoComponent implements OnInit {
-  barChartOptions: ChartOptions = { responsive: true };
+  barChartOptions: ChartOptions = {
+    responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      scales: { xAxes: [{}], yAxes: [{}] },
+      plugins: {
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+        }
+      }
+    };
   barChartLabels: Label[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
@@ -21,10 +32,10 @@ export class FuturoComponent implements OnInit {
     { data: [], label: 'Valor de tu cuenta actualmente' },
     { data: [], label: 'Valor a futuro' }
   ];
-
+  public barChartPlugins = [pluginDataLabels];
   title: string = '6 meses';
   monthsLabel: any[] = [];
-  yearLabel = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+  yearLabel = []
   yearFiveLabel: any[] = [];
   monederos: any[];
   paginas: any[];
@@ -61,6 +72,7 @@ export class FuturoComponent implements OnInit {
 
   createLabels(){
     this.getMonths();
+    this.getYear();
     this.getFiveYear();
     this.barChartLabels = this.monthsLabel;
   }
@@ -72,6 +84,16 @@ export class FuturoComponent implements OnInit {
       if(i > 11)
         loquesea = i - 12;
       this.monthsLabel.push(this.months.find(x => x.value === loquesea).name);
+    }
+  }
+  getYear() {
+    const month = new Date().getMonth();
+    let loquesea = 0;
+    for(let i = month; i < month + 12; i++) {
+      loquesea = i;
+      if(i > 11)
+        loquesea = i - 12;
+      this.yearLabel.push(this.months.find(x => x.value === loquesea).name);
     }
   }
   getFiveYear() {
@@ -93,6 +115,7 @@ export class FuturoComponent implements OnInit {
       this.title = '5 años';
       this.barChartLabels = this.yearFiveLabel;
     }
+    this.calculatePercent(chart === 1 ? 12 : chart);
   }
   selectPaginasComplete(){
     if(this.paginas.length === 0)
@@ -106,7 +129,7 @@ export class FuturoComponent implements OnInit {
       this.barChartData[0].data.push(this.total);
     this.selectPrecio_LastForkJoin(this.observablePrecios);
   }
-  calculatePercent() {
+  calculatePercent(d) {
     /*
       precio de la acción actual: 200
       precio de compra de la accion: 100
@@ -117,6 +140,8 @@ export class FuturoComponent implements OnInit {
       precio de costo promedio: 200 / 1  = (total de precio de acciones) / (cantidad)
       ((100 - 200) / 200) * 100 = -50% de ganancia
     */
+    const type = d;
+    this.barChartData[1].data = [];
     let totalPercent = 0;
     let monthPercent = 0;
     if(this.paginas.length === 0)
@@ -127,8 +152,17 @@ export class FuturoComponent implements OnInit {
     totalPercent = totalPercent / this.paginas.length;
     this.totalPercent = totalPercent;
     monthPercent = this.totalPercent/6;
-    for(let i = 1; i<7; i++)
-      this.barChartData[1].data.push((this.total * (totalPercent * i)) + this.total);
+    if(type === 5){
+      for(let i = 1; i < 61; i++) {
+        if(i == 12 || i == 24 || i == 36 || i == 48 || i == 60)
+          this.barChartData[1].data.push((this.total * (monthPercent * i)) + this.total);
+      }
+    }
+    else{
+      for(let i = 1; i < type + 1; i++)
+        this.barChartData[1].data.push((this.total * (monthPercent * i)) + this.total);
+    }
+
   }
   selectPrecio_Last(item){
     return this.precioService.selectItem_accionKey_Last(item);
@@ -139,7 +173,7 @@ export class FuturoComponent implements OnInit {
       (error) => { alert('Ha ocurrido un error') });
   }
   selectPrecio_LastForkJoinComplete(data) {
-    data.forEach(x => { this.precioLast[x.acion[0].accionKey] = x.acion[0].lastPrecio });
-    this.calculatePercent();
+    data.forEach(x => { this.precioLast[x.acion[0].accionKey] = x.acion[0].precio });
+    this.calculatePercent(6);
   }
 }

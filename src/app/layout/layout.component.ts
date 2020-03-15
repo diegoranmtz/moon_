@@ -14,6 +14,7 @@ export class LayoutComponent implements OnInit, OnDestroy{
    accions: any;
    accionsKey: any = [];
    lastPrecio = {};
+   usuario: string;
 
    constructor(
      private router: Router,
@@ -22,6 +23,9 @@ export class LayoutComponent implements OnInit, OnDestroy{
    ) {}
 
    ngOnInit() {
+     this.usuario = localStorage.getItem('usuario');
+     if(!this.usuario || this.usuario === '')
+      return this.router.navigate(['login']);
      this.pushRightClass = 'push-right';
      this.selectAccions();
    }
@@ -85,7 +89,7 @@ export class LayoutComponent implements OnInit, OnDestroy{
       }
 
     })
-    //this.insertPrecioForkJoin(observable);
+    this.insertPrecioForkJoin(observable);
   }
   selectItem_accionKey_LastForkJoinComplete(data) {
     this.lastPrecio = {};
