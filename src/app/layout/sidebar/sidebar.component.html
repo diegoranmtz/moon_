@@ -38,5 +38,13 @@
         <li><a mat-list-item [routerLink]="['/app/pagina']"><span>Agregar página</span></a></li>
       </ul>
     </div>
+    <div class="nested-menu">
+      <a mat-list-item (click)="addExpandClass('futuro')">
+        <mat-icon aria-label="Side nav toggle icon">chevron_right</mat-icon>Proyección a futuro
+      </a>
+      <ul class="nested submenu expand" [class.expand]="showMenu === 'futuro'">
+        <li><a mat-list-item [routerLink]="['/app/futuro']"><span>Ver tu cuenta a futuro</span></a></li>
+      </ul>
+    </div>
   </mat-nav-list>
 </div>

@@ -19,6 +19,9 @@ export class PaginaService {
   selectItem_Usuario_AccionKey(item: { usuario: string, accionKey: string }) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiUrl}/accionUser`, item);
   }
+  selectItem_Usuario_AccionKey_Cuatro(item: { usuario: string }) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiUrl}/accionUser/cuatro`, item);
+  }
   insertItem(item) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiUrl}/guardar`, item);
   }

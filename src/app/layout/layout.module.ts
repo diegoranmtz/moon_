@@ -19,6 +19,7 @@ import { SidebarService } from 'src/shared/services/sidebar.service';
 import { AccionComponent } from './accion/accion.component';
 import { MonederoComponent } from './monedero/monedero.component';
 import { PrecioService } from 'src/shared/services/precio.service';
+import { FuturoComponent } from './futuro/futuro.component';
 
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
     { path: 'pagina', component: PaginaComponent },
     { path: 'accion/:paginaKey', component: AccionComponent },
     { path: 'monedero/:accionKey', component: MonederoComponent },
+    { path: 'futuro', component: FuturoComponent },
     { path: '**', component: DashboardComponent }
   ]}
 ];
@@ -42,7 +44,8 @@ const routes: Routes = [
     ChartComponent,
     PaginaComponent,
     AccionComponent,
-    MonederoComponent
+    MonederoComponent,
+    FuturoComponent
   ],
   imports: [
     CommonModule,

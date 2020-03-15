@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   nombre: string = '';
   inversion: string = '';
   monederos: any;
+  cuatroPaginas: any;
 
   constructor(
     private paginaService: PaginaService,
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
     this.usuario = localStorage.getItem('usuario');
     this.selectMonederos();
     this.selectUsuario({ account: this.usuario });
+    this.selectPaginas_Cuatro({ usuario: this.usuario });
   }
 
   selectPaginas(usuario: string){
@@ -34,6 +36,11 @@ export class DashboardComponent implements OnInit {
       (data)=>{ this.paginas = data.acion },
       (error) => {alert('Ha ocurrido un error')},
       ()=> { this.selectPaginasComplete() })
+  }
+  selectPaginas_Cuatro(item){
+    this.paginaService.selectItem_Usuario_AccionKey_Cuatro(item).subscribe(
+      (data) => { this.cuatroPaginas = data.acion },
+      (error) => {alert('Ha ocurrido un error')});
   }
   selectPaginasComplete(){
     if(this.paginas.length === 0)

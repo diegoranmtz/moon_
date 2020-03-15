@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       this.saveLocalStorage(login.usuario.account);
       return this.router.navigate(['app/dashboard']);
     }
-    this.account.setErrors({'exist': true});
+    alert('Usuario y/o contraseña incorrectos');
   }
   saveLocalStorage(usuario){
     localStorage.setItem('usuario', usuario);

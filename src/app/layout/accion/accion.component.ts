@@ -17,6 +17,8 @@ export class AccionComponent implements OnInit {
   accions: any;
   usuario: string;
   paginaKey: string;
+  pagina: any;
+  mergedItem: any;
 
   constructor(
     private monederoService: MonederoService,
@@ -39,6 +41,7 @@ export class AccionComponent implements OnInit {
   }
 
   onSubmit() {
+    this.mergedItem = null;
     if (!this.form.valid)
      return;
    if (!this.form.dirty)
@@ -47,8 +50,9 @@ export class AccionComponent implements OnInit {
     const mergedItem = { ...this.form.value };
     mergedItem.usuario = this.usuario;
     mergedItem.paginaKey = this.paginaKey;
-    console.log(mergedItem);
-    this.insertItem(mergedItem);
+    this.mergedItem = mergedItem;
+
+    this.selectPagina({usuario: mergedItem.usuario, accionKey: mergedItem.accionKey});
   }
 
   createForm() {
@@ -73,8 +77,14 @@ export class AccionComponent implements OnInit {
   insertItem(item){
     this.paginaService.insertItem(item).subscribe(
       () => { alert('Guardado con éxito') },
-      (error) => { this.errorComplete(error) },
+      (error) => { alert('Ha ocurrido un error') },
       () => { this.changeSidebar() });
+  }
+  selectPagina(item) {
+    this.paginaService.selectItem_Usuario_AccionKey(item).subscribe(
+      (data) => { this.pagina = data.acion },
+      (error) => { alert('Ha ocurrido un error') },
+      () =>  { this.selectPaginaComplete() });
   }
   cambioPagina(paginaKey){
     this.selectAccions(paginaKey);
@@ -86,13 +96,9 @@ export class AccionComponent implements OnInit {
   redirect(){
     this.router.navigate(['/app/monedero/' + this.form.get('accionKey').value]);
   }
-  errorComplete(error){
-    if(!error.error)
-      return alert('Ha ocurrido un error');
-    if(!error.error.errors)
-      return alert('Ha ocurrido un error');
-    if(error.error.errors.errmsg.includes('duplicate'))
+  selectPaginaComplete() {
+    if(this.pagina.length > 0)
       return alert('Ya existe esta acción.');
-    return alert('Ha ocurrido un error');
+    this.insertItem(this.mergedItem);
   }
 }

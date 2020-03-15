@@ -16,7 +16,8 @@ export class PaginaComponent implements OnInit {
   form: FormGroup;
   accions: any;
   usuario: string;
-
+  pagina: any;
+  mergedItem: any;
   constructor(
     private monederoService: MonederoService,
     private formBuilder: FormBuilder,
@@ -32,6 +33,7 @@ export class PaginaComponent implements OnInit {
   }
 
   onSubmit() {
+    this.mergedItem = null;
     if (!this.form.valid)
      return;
    if (!this.form.dirty)
@@ -39,8 +41,10 @@ export class PaginaComponent implements OnInit {
 
     const mergedItem = { ...this.form.value };
     mergedItem.usuario = this.usuario;
-    console.log(mergedItem);
-    this.insertItem(mergedItem);
+
+    this.mergedItem = mergedItem;
+
+    this.selectPagina({usuario: mergedItem.usuario, accionKey: mergedItem.accionKey});
   }
 
   createForm() {
@@ -65,8 +69,14 @@ export class PaginaComponent implements OnInit {
   insertItem(item){
     this.paginaService.insertItem(item).subscribe(
       () => { alert('Guardado con éxito') },
-      (error) => { this.errorComplete(error) },
+      (error) => { alert('Ha ocurrido un error') },
       () => { this.changeSidebar() });
+  }
+  selectPagina(item) {
+    this.paginaService.selectItem_Usuario_AccionKey(item).subscribe(
+      (data) => { this.pagina = data.acion },
+      (error) => { alert('Ha ocurrido un error') },
+      () =>  { this.selectPaginaComplete() });
   }
   cambioPagina(paginaKey){
     this.selectAccions(paginaKey);
@@ -78,13 +88,9 @@ export class PaginaComponent implements OnInit {
   redirect(){
     this.router.navigate(['/app/monedero/' + this.form.get('accionKey').value]);
   }
-  errorComplete(error){
-    if(!error.error)
-      return alert('Ha ocurrido un error');
-    if(!error.error.errors)
-      return alert('Ha ocurrido un error');
-    if(error.error.errors.errmsg.includes('duplicate'))
-      return alert('Ya existe esta acción.');
-    return alert('Ha ocurrido un error');
+  selectPaginaComplete() {
+    if(this.pagina.length > 0)
+      return alert('Ya existe esta página ó acción.');
+    this.insertItem(this.mergedItem);
   }
 }

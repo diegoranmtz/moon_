@@ -49,7 +49,7 @@ export class RegisterComponent implements OnInit{
       alert('Usuario creado con exito');
       this.router.navigate(['/login']);
     }
-    if(data.errors._message === 'Usuario validation failed')
+    if(data.errors && data.errors._message === 'Usuario validation failed')
       this.account.setErrors({'exist': true});
   }
 }

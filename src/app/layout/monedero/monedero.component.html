@@ -11,6 +11,7 @@
     <div class="card">
       <div class="card-body">
         <h6>Valor de la acción: ${{total}}</h6>
+        <h6>Plus/Minus: <b [ngClass]="{'verde': plusMinus > 0, 'rojo': plusMinus < 0 }">{{plusMinus < 0 ? '-$' + plusMinus * -1 : '$' + plusMinus}}</b></h6>
       </div>
     </div>
   </div>

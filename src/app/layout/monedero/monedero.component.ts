@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PaginaService } from 'src/shared/services/pagina.service';
 import { SidebarService } from 'src/shared/services/sidebar.service';
+import { PrecioService } from 'src/shared/services/precio.service';
 
 @Component({
   selector: 'app-monedero',
@@ -15,13 +16,16 @@ export class MonederoComponent implements OnInit{
   total: number = 0;
   form: FormGroup;
   item: any;
+  plusMinus: number = 0;
+  precioLast: any;
 
   constructor(
     private route: ActivatedRoute,
     private paginaService: PaginaService,
     private formBuilder: FormBuilder,
     private sidebarService: SidebarService,
-    private router: Router
+    private router: Router,
+    private precioService: PrecioService
   ){ }
   ngOnInit() {
     this.createForm();
@@ -71,13 +75,14 @@ export class MonederoComponent implements OnInit{
     this.form.get('precioBuy').setValue(this.item.precioBuy);
     this.form.get('cantidad').setValue(this.item.cantidad);
     this.total = +this.item.precioBuy * +this.item.cantidad;
+    this.selectLastPrecio({ accionKey: this.accionKey });
   }
   updateItemComplete(){
     alert('Guardado con éxito.');
     this.selectItem({ usuario: this.usuario, accionKey: this.accionKey });
   }
   deleteItemComplete(){
-    alert('Vendido con éxito.');
+    alert('Vendido con éxito. Has ' + (this.plusMinus < 0 ? ('perdido ' + this.plusMinus) : ('ganado ' + this.plusMinus)) + ' pesos.');
 
     this.sidebarService.updateSidebar();
     this.router.navigate(['/app/dashboard']);
@@ -87,5 +92,14 @@ export class MonederoComponent implements OnInit{
   }
   changeSidebar(){
     this.sidebarService.updateSidebar();
+  }
+  selectLastPrecio(item) {
+    this.precioService.selectItem_accionKey_Last(item).subscribe(
+      (data) => {this.precioLast = data.acion[0]},
+      (error)=>{ alert('Ha ocurrido un error') },
+      ()=> { this.selectLastPrecioComplete() });
+  }
+  selectLastPrecioComplete() {
+    this.plusMinus = (this.precioLast.precio - this.item.precioBuy) * +this.item.cantidad;
   }
 }
