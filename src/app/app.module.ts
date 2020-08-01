@@ -10,6 +10,8 @@ import { LayoutModule } from './layout/layout.module';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
+import { FormUploadComponent } from './layout/photo/photo.component';
+import { ViewFormUploadComponent } from './layout/photo/viewPhoto.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,7 +24,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FormUploadComponent,
+    ViewFormUploadComponent
   ],
   imports: [
     BrowserModule,

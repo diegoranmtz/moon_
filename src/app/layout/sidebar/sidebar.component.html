@@ -46,5 +46,14 @@
         <li><a mat-list-item [routerLink]="['/app/futuro']"><span>Ver tu cuenta a futuro</span></a></li>
       </ul>
     </div>
+    <div class="nested-menu">
+      <a mat-list-item (click)="addExpandClass('documentos')">
+        <mat-icon aria-label="Side nav toggle icon">chevron_right</mat-icon>Documentos
+      </a>
+      <ul class="nested submenu expand" [class.expand]="showMenu === 'documentos'">
+        <li><a mat-list-item [routerLink]="['/app/addDocument']"><span>Agregar documentos</span></a></li>
+        <li><a mat-list-item [routerLink]="['/app/showDocument']"><span>Ver documentos</span></a></li>
+      </ul>
+    </div>
   </mat-nav-list>
 </div>
